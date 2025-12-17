@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<title>🎆 Tết Dương này đi chơi nhé Chuyên</title>
+
+<style>
+body {
+    background: url("https://i.ibb.co/pv35h25f/tet-jpg.jpg")
+                no-repeat center center fixed;
+    background-size: cover;
+    font-family: 'Segoe UI', sans-serif;
+    margin: 0;
+    height: 100vh;
+}
+
+
+.overlay {
+    background: rgba(0,0,0,0.55);
+    position: fixed;
+    inset: 0;
+}
+
+.card {
+    position: relative;
+    background: #fff;
+    border-radius: 22px;
+    padding: 24px;
+    width: 380px;
+    margin: auto;
+    top: 50%;
+    transform: translateY(-50%);
+    text-align: center;
+    box-shadow: 0 20px 30px rgba(0,0,0,0.35);
+    z-index: 2;
+}
+
+.banner {
+    width: 100%;
+    border-radius: 16px;
+    margin-bottom: 12px;
+}
+
+#text {
+    font-size: 17px;
+    min-height: 90px;
+    margin-bottom: 18px;
+}
+
+button {
+    padding: 12px 26px;
+    font-size: 16px;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    margin: 6px;
+}
+
+#yes {
+    background: #e67e22;
+    color: white;
+}
+
+#no {
+    background: #bdc3c7;
+    position: absolute;
+}
+
+.cute {
+    font-size: 26px;
+    margin: 6px 0;
+}
+
+/* ===== Trang kết quả ===== */
+#result {
+    display: none;
+}
+
+.result-text {
+    font-size: 20px;
+    margin: 18px 0;
+}
+
+.icons {
+    font-size: 32px;
+}
+</style>
+
+<script>
+const lines = [
+    "Chuyên ơi 👋",
+    "Năm mới sắp đến rồi, bạn đã có dự định gì cho ngày đầu năm mới chưa 🤗",
+    "Tớ muốn dành ngày đầu tiên của năm để ở bên bạn 🤗",
+    "Mình cùng đi chơi, dạo phố, ăn món ngon và bắt đầu một năm mới thật đẹp nhé",
+    "Cùng nhau, được không nhỉ 🥰"
+];
+
+
+const question = "👉 Tết Dương này đi chơi cùng Cường nhé? 😄";
+
+let i = 0, j = 0;
+
+function typeText(text, callback) {
+    j = 0;
+    document.getElementById("text").innerHTML = "";
+    const typing = setInterval(() => {
+        if (j < text.length) {
+            document.getElementById("text").innerHTML += text.charAt(j);
+            j++;
+        } else {
+            clearInterval(typing);
+            if (callback) setTimeout(callback, 700);
+        }
+    }, 45);
+}
+
+function nextLine() {
+    if (i < lines.length) {
+        typeText(lines[i], () => {
+            i++;
+            nextLine();
+        });
+    } else {
+        typeText(question, () => {
+            document.getElementById("buttons").style.display = "block";
+        });
+    }
+}
+
+function yesClick() {
+    document.getElementById("page1").style.display = "none";
+    document.getElementById("result").style.display = "block";
+}
+
+function moveNo() {
+    const no = document.getElementById("no");
+    no.style.left = Math.random() * 240 + "px";
+    no.style.top = Math.random() * 140 + "px";
+}
+
+window.onload = nextLine;
+</script>
+</head>
+
+<body>
+<div class="overlay"></div>
+
+<!-- ===== TRANG 1 ===== -->
+<div class="card" id="page1">
+    <!-- Ảnh Tết Dương mới -->
+    <img class="banner"
+         src="https://i.ibb.co/wrp5rHGH/tet3-jpg.jpg"
+         alt="Tết Dương">
+
+    <div class="cute">🎆✨🥂</div>
+    <div id="text"></div>
+
+    <div id="buttons" style="display:none;">
+        <button id="yes" onclick="yesClick()">Đồng ý 😄</button>
+        <button id="no" onmouseover="moveNo()">Từ chối 🙃</button>
+    </div>
+</div>
+
+
+<!-- ===== TRANG KẾT QUẢ ===== -->
+<div class="card" id="result">
+    <!-- Ảnh Tết Dương mới -->
+    <img class="banner"
+         src="https://i.ibb.co/gM4JdY8D/tet2-jpg.jpg"
+         alt="Tết Dương">
+
+    <div class="icons">🎆💖🥳</div>
+    <div class="result-text">
+        <b>Vậy hẹn Tết Dương đi chơi nhé Chuyên!</b><br><br>
+        Cường chốt kèo luôn 😆
+    </div>
+    <div class="icons">✨🍾🎉</div>
+</div>
+
+</body>
+</html>
